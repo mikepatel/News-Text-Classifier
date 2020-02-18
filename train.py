@@ -11,6 +11,8 @@ File description:
 ################################################################################
 # Imports
 import os
+import sys
+import argparse
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -21,6 +23,23 @@ from parameters import *
 ################################################################################
 # Main
 if __name__ == "__main__":
+    """
+    # CLI arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--cnn", "Classify using a CNN", action="store_true")
+    parser.add_argument("--rnn", "Classify using an RNN", action="store_true")
+    args = parser.parse_args()
+    
+    if args.cnn:
+        # use CNN
+    elif args.rnn:
+        # uss RNN
+    else:
+        print(f'Please provide an argument')
+        parser.print_help()
+        sys.exit(1)
+    """
+
     # print out TF version
     print(f'TF version: {tf.__version__}')
 
