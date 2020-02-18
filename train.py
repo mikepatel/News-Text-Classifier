@@ -78,12 +78,13 @@ if __name__ == "__main__":
     print(f'Number of test text examples: {len(test_text)}')
     print(f'Number of text labels: {len(test_labels)}')
 
-    MAX_WORDS = len(set(text))  # limit data to top x words
+    MAX_WORDS = 1000  # limit data to top x words
     tokenize = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)
-    tokenize.fit_on_texts(text)
-    t = tokenize.texts_to_matrix(text)
-    print(np.array(t).shape)
-    print(t)
+    tokenize.fit_on_texts(text)  # update internal vocabulary based on list of texts
+    
+    train_text = tokenize.texts_to_matrix(train_text)
+    print(np.array(train_text).shape)
+    print(train_text)
 
     # truncate/pad input sequences so that they are all the same length
 
