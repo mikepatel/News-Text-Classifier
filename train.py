@@ -39,6 +39,10 @@ if __name__ == "__main__":
     text = list(df["text"])
     labels = list(df["category"])
 
+    vocab = set(text)
+    vocab_size = len(vocab)
+    print(f'Vocab size: {vocab_size}')
+
     classes = set(labels)
     num_classes = len(classes)
     print(f'Classes: {classes}')
@@ -81,7 +85,7 @@ if __name__ == "__main__":
     MAX_WORDS = 1000  # limit data to top x words
     tokenize = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)
     tokenize.fit_on_texts(text)  # update internal vocabulary based on list of texts
-    
+
     train_text = tokenize.texts_to_matrix(train_text)
     print(np.array(train_text).shape)
     print(train_text)
