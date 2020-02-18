@@ -11,6 +11,7 @@ File description:
 ################################################################################
 # Imports
 import os
+import numpy as np
 import pandas as pd
 import tensorflow as tf
 
@@ -30,18 +31,6 @@ if __name__ == "__main__":
     # ETL = Extraction, Transformation, Load
     text = []
     labels = []
-
-    # 80% training set
-    train_text = []
-    train_labels = []
-
-    # 10% validation set
-    val_text = []
-    val_labels = []
-
-    # 10% test set
-    test_text = []
-    test_labels = []
 
     # read in csv
     data_filepath = os.path.join(os.getcwd(), "data\\bbc-text.csv")
@@ -70,12 +59,15 @@ if __name__ == "__main__":
     for i in range(len(labels)):
         labels[i] = cat2int[labels[i]]
 
+    # 80% training set
     train_text = text[:int(0.8*len(text))]
     train_labels = labels[:int(0.8*len(labels))]
 
+    # 10% validation set
     val_text = text[int(0.8*len(text)):int(0.9*len(text))]
     val_labels = labels[int(0.8*len(labels)):int(0.9*len(labels))]
 
+    # 10% test set
     test_text = text[int(0.9*len(text)):]
     test_labels = labels[int(0.9*len(labels)):]
 
@@ -86,7 +78,23 @@ if __name__ == "__main__":
     print(f'Number of test text examples: {len(test_text)}')
     print(f'Number of text labels: {len(test_labels)}')
 
+    MAX_WORDS = len(set(text))  # limit data to top x words
+    tokenize = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)
+    tokenize.fit_on_texts(text)
+    t = tokenize.texts_to_matrix(text)
+    print(np.array(t).shape)
+    print(t)
+
+    # truncate/pad input sequences so that they are all the same length
+
+    # split data into training, validation, test sets
+
+    # print shape
+
     # ----- MODEL ----- #
+    # Embedding
+    # GRU
+    # Dense output
 
     # ----- ASSESSMENT ----- #
     # accuracy
