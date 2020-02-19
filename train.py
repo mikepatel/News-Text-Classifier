@@ -142,6 +142,12 @@ if __name__ == "__main__":
     m = build_rnn(vocab_size, num_categories)
     m.summary()
 
+    m.compile(
+        loss=tf.keras.losses.categorical_crossentropy,  # labels are one-hot encoded
+        optimizer=tf.keras.optimizers.Adam(),
+        metrics=["accuracy"]
+    )
+
     # ----- ASSESSMENT ----- #
     # accuracy
 
