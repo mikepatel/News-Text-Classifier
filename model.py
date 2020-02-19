@@ -35,7 +35,7 @@ def build_rnn(vocab_size, num_categories):
     # Fully connected output layer
     model.add(tf.keras.layers.Dense(
         units=num_categories,
-        activation="softmax"
+        activation=tf.keras.activations.softmax
     ))
 
     return model

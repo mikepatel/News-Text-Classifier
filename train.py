@@ -136,9 +136,7 @@ if __name__ == "__main__":
     print(f'Shape of test labels: {test_labels.shape}')
 
     # ----- MODEL ----- #
-    # Embedding
-    # GRU
-    # Dense output
+    # build model
     m = build_rnn(vocab_size, num_categories)
     m.summary()
 
@@ -146,6 +144,15 @@ if __name__ == "__main__":
         loss=tf.keras.losses.categorical_crossentropy,  # labels are one-hot encoded
         optimizer=tf.keras.optimizers.Adam(),
         metrics=["accuracy"]
+    )
+
+    # train model
+    history = m.fit(
+        x=train_text,
+        y=train_labels,
+        epochs=NUM_EPOCHS,
+        batch_size=BATCH_SIZE,
+        validation_data=(val_text, val_labels)
     )
 
     # ----- ASSESSMENT ----- #
