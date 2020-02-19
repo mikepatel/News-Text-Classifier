@@ -55,6 +55,7 @@ if __name__ == "__main__":
     data_filepath = os.path.join(os.getcwd(), "data\\bbc-text.csv")
     df = pd.read_csv(data_filepath)
 
+    # gather text sequences and cateogory labels
     text = list(df["text"])
     labels = list(df["category"])
 
@@ -62,37 +63,40 @@ if __name__ == "__main__":
     vocab_size = len(vocab)
     print(f'Vocab size: {vocab_size}')
 
-    classes = set(labels)
-    num_classes = len(classes)
-    print(f'Classes: {classes}')
-    print(f'Number of classes: {num_classes}')
+    categories = set(labels)
+    num_categories = len(categories)
+    print(f'Categories: {categories}')
+    print(f'Number of categories: {num_categories}')
+    print(f'{df["category"].value_counts()}')
 
     # create mapping of class categories to integers
     cat2int = {}
     i = 0
-    for c in classes:
+    for c in categories:
         cat2int[c] = i
         i += 1
-    #print(cat2int)
 
     # create reverse mapping of integers to class categories
     int2cat = {v: k for k, v in cat2int.items()}
-    #print(int2cat)
 
+    # convert all categorical labels to integers
     for i in range(len(labels)):
         labels[i] = cat2int[labels[i]]
 
     # 80% training set
     train_text = text[:int(0.8*len(text))]
     train_labels = labels[:int(0.8*len(labels))]
+    train_labels = np.array(train_labels)
 
     # 10% validation set
     val_text = text[int(0.8*len(text)):int(0.9*len(text))]
     val_labels = labels[int(0.8*len(labels)):int(0.9*len(labels))]
+    val_labels = np.array(val_labels)
 
     # 10% test set
     test_text = text[int(0.9*len(text)):]
     test_labels = labels[int(0.9*len(labels)):]
+    test_labels = np.array(test_labels)
 
     print(f'Number of training text examples: {len(train_text)}')
     print(f'Number of training labels: {len(train_labels)}')
@@ -101,19 +105,33 @@ if __name__ == "__main__":
     print(f'Number of test text examples: {len(test_text)}')
     print(f'Number of text labels: {len(test_labels)}')
 
-    MAX_WORDS = 1000  # limit data to top x words
-    tokenize = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)
+    # Tokenization
+    tokenize = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)  # word tokens
     tokenize.fit_on_texts(text)  # update internal vocabulary based on list of texts
 
+    # Vectorization
     train_text = tokenize.texts_to_matrix(train_text)
-    print(np.array(train_text).shape)
-    print(train_text)
+    train_text = np.array(train_text)
+    val_text = tokenize.texts_to_matrix(val_text)
+    val_text = np.array(val_text)
+    test_text = tokenize.texts_to_matrix(test_text)
+    test_text = np.array(test_text)
 
     # truncate/pad input sequences so that they are all the same length
 
-    # split data into training, validation, test sets
+    # one-hot encode labels because the ordering of category values is not important
+    # only 5 categories, so not a huge increase in the dimensionality
+    train_labels = tf.keras.utils.to_categorical(train_labels, num_categories)
+    val_labels = tf.keras.utils.to_categorical(val_labels, num_categories)
+    test_labels = tf.keras.utils.to_categorical(test_labels, num_categories)
 
     # print shape
+    print(f'Shape of train text: {train_text.shape}')
+    print(f'Shape of train labels: {train_labels.shape}')
+    print(f'Shape of validation text: {val_text.shape}')
+    print(f'Shape of validation labels: {val_labels.shape}')
+    print(f'Shape of test text: {test_text.shape}')
+    print(f'Shape of test labels: {test_labels.shape}')
 
     # ----- MODEL ----- #
     # Embedding
