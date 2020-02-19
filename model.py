@@ -43,3 +43,18 @@ def build_rnn(vocab_size, num_categories):
 
 ################################################################################
 # CNN
+def build_cnn(num_categories):
+    model = tf.keras.Sequential()
+
+    model.add(tf.keras.layers.Dense(
+        units=512,
+        input_shape=(MAX_WORDS, ),
+        activation=tf.keras.activations.relu
+    ))
+
+    model.add(tf.keras.layers.Dense(
+        units=num_categories,
+        activation=tf.keras.activations.softmax
+    ))
+
+    return model

@@ -47,6 +47,8 @@ if __name__ == "__main__":
     # eager execution is enabled by default in TF 2.0
     print(f'Using eager execution: {tf.executing_eagerly()}')
 
+    # print(f'GPU available: {tf.test.is_gpu_available()}')
+
     # ----- ETL ----- #
     # ETL = Extraction, Transformation, Load
     text = []
@@ -137,7 +139,8 @@ if __name__ == "__main__":
 
     # ----- MODEL ----- #
     # build model
-    m = build_rnn(vocab_size, num_categories)
+    #m = build_rnn(vocab_size, num_categories)
+    m = build_cnn(num_categories)
     m.summary()
 
     m.compile(
