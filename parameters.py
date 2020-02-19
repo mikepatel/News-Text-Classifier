@@ -12,3 +12,7 @@ File description:
 ################################################################################
 NUM_EPOCHS = 1
 BATCH_SIZE = 16
+NUM_RNN_UNITS = 128
+MAX_WORDS = 1000  # limit data to top x words
+MAX_SEQ_LENGTH = 100  #
+EMBEDDING_DIM = 100  #

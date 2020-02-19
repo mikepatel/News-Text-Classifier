@@ -18,6 +18,7 @@ import pandas as pd
 import tensorflow as tf
 
 from parameters import *
+from model import *
 
 
 ################################################################################
@@ -121,6 +122,7 @@ if __name__ == "__main__":
 
     # one-hot encode labels because the ordering of category values is not important
     # only 5 categories, so not a huge increase in the dimensionality
+    # sequences of integers
     train_labels = tf.keras.utils.to_categorical(train_labels, num_categories)
     val_labels = tf.keras.utils.to_categorical(val_labels, num_categories)
     test_labels = tf.keras.utils.to_categorical(test_labels, num_categories)
@@ -137,6 +139,8 @@ if __name__ == "__main__":
     # Embedding
     # GRU
     # Dense output
+    m = build_rnn(vocab_size, num_categories)
+    m.summary()
 
     # ----- ASSESSMENT ----- #
     # accuracy
