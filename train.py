@@ -140,7 +140,7 @@ if __name__ == "__main__":
     # ----- MODEL ----- #
     # build model
     #m = build_rnn(vocab_size, num_categories)
-    m = build_cnn(num_categories)
+    m = build_fc(num_categories)
     m.summary()
 
     m.compile(

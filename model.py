@@ -42,8 +42,8 @@ def build_rnn(vocab_size, num_categories):
 
 
 ################################################################################
-# CNN
-def build_cnn(num_categories):
+# FC
+def build_fc(num_categories):
     model = tf.keras.Sequential()
 
     model.add(tf.keras.layers.Dense(
