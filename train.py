@@ -109,15 +109,17 @@ if __name__ == "__main__":
     print(f'Number of text labels: {len(test_labels)}')
 
     # Tokenization
-    tokenize = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)  # word tokens
-    tokenize.fit_on_texts(text)  # update internal vocabulary based on list of texts
+    tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)  # word tokens
+    tokenizer.fit_on_texts(text)  # update internal vocabulary based on list of texts
+
+    word2int = tokenizer.word_index
 
     # Vectorization
-    train_text = tokenize.texts_to_matrix(train_text)
+    train_text = tokenizer.texts_to_matrix(train_text)
     train_text = np.array(train_text)
-    val_text = tokenize.texts_to_matrix(val_text)
+    val_text = tokenizer.texts_to_matrix(val_text)
     val_text = np.array(val_text)
-    test_text = tokenize.texts_to_matrix(test_text)
+    test_text = tokenizer.texts_to_matrix(test_text)
     test_text = np.array(test_text)
 
     # truncate/pad input sequences so that they are all the same length
