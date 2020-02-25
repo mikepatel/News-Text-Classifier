@@ -182,7 +182,8 @@ if __name__ == "__main__":
     test_loss, test_accuracy = m.evaluate(
         x=test_text,
         y=test_labels,
-        batch_size=BATCH_SIZE
+        batch_size=BATCH_SIZE,
+        verbose=0
     )
 
     print(f'Test loss: {test_loss:.6f}')
@@ -193,7 +194,7 @@ if __name__ == "__main__":
     # precision
 
     # recall
-    
+
     # ----- SAVE MODEL ----- #
 
     # ----- PREDICTION ----- #
