@@ -58,13 +58,9 @@ if __name__ == "__main__":
     data_filepath = os.path.join(os.getcwd(), "data\\bbc-text.csv")
     df = pd.read_csv(data_filepath)
 
-    # gather text sequences and cateogory labels
+    # gather text sequences and category labels
     text = list(df["text"])
     labels = list(df["category"])
-
-    vocab = set(text)
-    vocab_size = len(vocab)
-    print(f'Vocab size: {vocab_size}')
 
     categories = set(labels)
     num_categories = len(categories)
@@ -112,7 +108,9 @@ if __name__ == "__main__":
     tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)  # word tokens
     tokenizer.fit_on_texts(text)  # update internal vocabulary based on list of texts
 
-    word2int = tokenizer.word_index
+    word2int = tokenizer.word_index  # unique tokens
+    vocab_size = len(word2int)
+    print(f'Number of unique tokens/Vocab size: {vocab_size}')
 
     # Vectorization
     train_text = tokenizer.texts_to_matrix(train_text)
@@ -160,8 +158,20 @@ if __name__ == "__main__":
         validation_data=(val_text, val_labels)
     )
 
+    # plot training visualization
+
     # ----- ASSESSMENT ----- #
     # accuracy
+    test_loss, test_accuracy = m.evaluate(
+        x=test_text,
+        y=test_labels,
+        batch_size=BATCH_SIZE
+    )
+
+    print(f'Test loss: {test_loss:.4f}')
+    print(f'Test accuracy: {test_accuracy:.4f}')
+
+    # confusion matrix
 
     # precision
 
