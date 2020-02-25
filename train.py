@@ -161,7 +161,7 @@ if __name__ == "__main__":
     # plot training visualization
 
     # ----- ASSESSMENT ----- #
-    # accuracy
+    # test loss, test accuracy
     test_loss, test_accuracy = m.evaluate(
         x=test_text,
         y=test_labels,

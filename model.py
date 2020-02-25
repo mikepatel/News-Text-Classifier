@@ -48,7 +48,7 @@ def build_fc(num_categories):
 
     model.add(tf.keras.layers.Dense(
         units=512,
-        input_shape=(MAX_WORDS, ),
+        input_shape=(MAX_WORDS, ),  # (batch, MAX_WORDS)
         activation=tf.keras.activations.relu
     ))
 
