@@ -18,3 +18,4 @@ python train.py
 ## Results
 
 ## Visualizations
+![25 February 2020](https://github.com/mikepatel/News-Text-Classifier/blob/master/results/25-02-2020_18-28-21/Training%20Accuracy.png)
