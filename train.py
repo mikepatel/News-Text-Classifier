@@ -139,7 +139,7 @@ if __name__ == "__main__":
     print(f'Shape of test text: {test_text.shape}')
     print(f'Shape of test labels: {test_labels.shape}')
 
-    # ----- MODEL ----- #
+    # ----- TRAIN MODEL ----- #
     # build model
     #m = build_rnn(vocab_size, num_categories)
     m = build_fc(num_categories)
@@ -193,5 +193,7 @@ if __name__ == "__main__":
     # precision
 
     # recall
+    
+    # ----- SAVE MODEL ----- #
 
     # ----- PREDICTION ----- #
