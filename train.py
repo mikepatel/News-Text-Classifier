@@ -14,7 +14,9 @@ import os
 import sys
 import argparse
 import numpy as np
+from datetime import datetime
 import pandas as pd
+import matplotlib.pyplot as plt
 import tensorflow as tf
 
 from parameters import *
@@ -159,6 +161,21 @@ if __name__ == "__main__":
     )
 
     # plot training visualization
+    # create output directory
+    output_dir = "results\\" + datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # plot accuracy
+    plt.plot(history.history["accuracy"], label="accuracy")
+    plt.plot(history.history["val_accuracy"], label="val_accuracy")
+    plt.title("Training Accuracy")
+    plt.xlabel("Epoch")
+    plt.ylabel("Accuracy")
+    plt.ylim([0.0, 1.1])
+    plt.grid()
+    plt.legend(loc="lower right")
+    plt.savefig(output_dir + "\\Training Accuracy")
 
     # ----- ASSESSMENT ----- #
     # test loss, test accuracy
@@ -168,8 +185,8 @@ if __name__ == "__main__":
         batch_size=BATCH_SIZE
     )
 
-    print(f'Test loss: {test_loss:.4f}')
-    print(f'Test accuracy: {test_accuracy:.4f}')
+    print(f'Test loss: {test_loss:.6f}')
+    print(f'Test accuracy: {test_accuracy:.6f}')
 
     # confusion matrix
 
