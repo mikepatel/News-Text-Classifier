@@ -189,11 +189,28 @@ if __name__ == "__main__":
     print(f'Test loss: {test_loss:.6f}')
     print(f'Test accuracy: {test_accuracy:.6f}')
 
+    # predictions for assessment
+    test_predictions = m.predict(test_text)
+
     # confusion matrix
 
     # precision
+    p = tf.keras.metrics.Precision()
+    p.update_state(
+        y_true=test_labels,
+        y_pred=test_predictions
+    )
+    precision = p.result().numpy()
+    print(f'Precision: {precision:.6f}')
 
     # recall
+    r = tf.keras.metrics.Recall()
+    r.update_state(
+        y_true=test_labels,
+        y_pred=test_predictions
+    )
+    recall = r.result().numpy()
+    print(f'Recall: {recall:.6f}')
 
     # ----- SAVE MODEL ----- #
 
