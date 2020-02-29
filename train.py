@@ -215,3 +215,17 @@ if __name__ == "__main__":
     # ----- SAVE MODEL ----- #
 
     # ----- PREDICTION ----- #
+    # read in news data
+    news_df = pd.read_csv(os.path.join(os.getcwd(), "data\\prediction_data.csv"), encoding="windows-1252")
+    news_blurbs = news_df["Text"]
+
+    # tokenize
+    news_tokens = tokenizer.texts_to_matrix(news_blurbs)
+    news_tokens = np.array(news_tokens)
+
+    # make predictions
+    predictions = m.predict(news_tokens)
+
+    for i in range(len(news_blurbs)):
+        print(f'\nNews blurb: {news_blurbs[i]}')
+        print(f'\nPrediction: {int2cat[np.argmax(predictions[i])]}')
