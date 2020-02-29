@@ -16,13 +16,12 @@ python train.py
 ```
 
 ## Results
-### 25 February 2020
 * Test loss: 0.136383
 * Test accuracy: 0.955157
 * Precision: 0.958716
 * Recall: 0.937220
 
-#### Predictions
+### Predictions
 | News text | Prediction |
 :-----------|:------------
 | The US and the Taliban have signed a "comprehensive peace agreement" to end fighting in Afghanistan after more than 18 years of conflict. | politics |
@@ -33,5 +32,5 @@ python train.py
 | March sees the release of Onward and the Mulan reboot, as well as Hirokazu Kore-Eda’s French-language debut, The Truth. | entertainment |
 | In 2015, the boss of a card payments company in Seattle introduced a $70,000 minimum salary for all of his 120 staff - and personally took a pay cut of $1m. | business |
 
-#### Visualization
+### Visualization
 ![25 February 2020](https://github.com/mikepatel/News-Text-Classifier/blob/master/results/25-02-2020_18-28-21/Training%20Accuracy.png)
