@@ -19,6 +19,8 @@ python train.py
 ### 25 February 2020
 * Test loss: 0.136383
 * Test accuracy: 0.955157
+* Precision: 0.958716
+* Recall: 0.937220
 
 #### Visualization
 ![25 February 2020](https://github.com/mikepatel/News-Text-Classifier/blob/master/results/25-02-2020_18-28-21/Training%20Accuracy.png)
