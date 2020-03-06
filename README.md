@@ -21,7 +21,6 @@ python train.py
 * Precision: 0.958716
 * Recall: 0.937220
 
-### Predictions
 | News text | Prediction |
 :-----------|:------------
 | The US and the Taliban have signed a "comprehensive peace agreement" to end fighting in Afghanistan after more than 18 years of conflict. | politics |
