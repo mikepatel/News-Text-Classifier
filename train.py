@@ -108,7 +108,9 @@ if __name__ == "__main__":
 
     # Tokenization
     tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=MAX_WORDS, char_level=False)  # word tokens
-    tokenizer.fit_on_texts(text)  # update internal vocabulary based on list of texts
+
+    # tokenize on only the training data
+    tokenizer.fit_on_texts(train_text)  # update internal vocabulary based on list of texts
 
     word2int = tokenizer.word_index  # unique tokens
     vocab_size = len(word2int)
